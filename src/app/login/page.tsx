@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { supabase } from '@/lib/supabase'
+import { supabase, getURL } from '@/lib/supabase'
 import { Sparkles, ArrowRight, Mail, Lock, UserPlus, LogIn, Github } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
@@ -21,7 +21,7 @@ export default function LoginPage() {
         const { error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: `${window.location.origin}/auth/callback`,
+                redirectTo: `${getURL()}auth/callback`,
             },
         })
         if (error) {
@@ -41,7 +41,7 @@ export default function LoginPage() {
                 email,
                 password,
                 options: {
-                    emailRedirectTo: `${window.location.origin}/auth/callback`,
+                    emailRedirectTo: `${getURL()}auth/callback`,
                 },
             })
             if (error) {
