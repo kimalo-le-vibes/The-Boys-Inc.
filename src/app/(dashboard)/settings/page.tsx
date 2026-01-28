@@ -73,8 +73,8 @@ export default function SettingsPage() {
 
         try {
             const fileExt = file.name.split('.').pop()
-            const fileName = `${userId}-${Math.random().toString(36).substring(2)}.${fileExt}`
-            const filePath = `avatars/${fileName}`
+            const fileName = `${Date.now()}.${fileExt}`
+            const filePath = `${userId}/${fileName}`
 
             // 1. Upload to Storage
             const { error: uploadError, data } = await supabase.storage
