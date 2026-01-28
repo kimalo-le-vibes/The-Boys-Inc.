@@ -13,7 +13,9 @@ import {
     LogOut,
     User,
     Upload,
-    Camera
+    Camera,
+    Trash2,
+    AlertTriangle
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { supabase } from '@/lib/supabase'
@@ -34,6 +36,9 @@ export default function SettingsPage() {
     // UI State
     const [isSaving, setIsSaving] = useState(false)
     const [isUploading, setIsUploading] = useState(false)
+    const [isDeleting, setIsDeleting] = useState(false)
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [deleteConfirmText, setDeleteConfirmText] = useState('')
     const [message, setMessage] = useState<{ text: string, type: 'success' | 'error' } | null>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -138,6 +143,46 @@ export default function SettingsPage() {
     const handleSignOut = async () => {
         await supabase.auth.signOut()
         router.push('/login')
+    }
+
+    const handleDeleteAccount = async () => {
+        if (deleteConfirmText !== 'DELETE') {
+            setMessage({ text: 'Please type DELETE to confirm', type: 'error' })
+            return
+        }
+
+        setIsDeleting(true)
+        setMessage(null)
+
+        try {
+            const { data: { session } } = await supabase.auth.getSession()
+            if (!session) throw new Error('No session')
+
+            // Call the Edge Function to delete user
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/delete-user`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${session.access_token}`,
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
+
+            if (!response.ok) {
+                const error = await response.json()
+                throw new Error(error.error || 'Failed to delete account')
+            }
+
+            // Sign out and redirect to login
+            await supabase.auth.signOut()
+            router.push('/login')
+        } catch (error: any) {
+            console.error('Delete error:', error)
+            setMessage({ text: error.message || 'Failed to delete account', type: 'error' })
+            setIsDeleting(false)
+        }
     }
 
     if (isLoading) {
@@ -286,6 +331,29 @@ export default function SettingsPage() {
                     </div>
                 </section>
 
+                {/* Danger Zone */}
+                <section className="space-y-3">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-rose-500 ml-1">⚠️ Danger Zone</h3>
+                    <div className="bg-rose-950/20 border border-rose-900/50 rounded-2xl p-5 space-y-3">
+                        <div className="flex items-start gap-3">
+                            <AlertTriangle className="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" />
+                            <div className="space-y-1">
+                                <p className="text-sm font-bold text-rose-200">Delete Account</p>
+                                <p className="text-xs text-rose-300/70 leading-relaxed">
+                                    Permanently delete your account and all associated data. This action cannot be undone.
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => setShowDeleteModal(true)}
+                            className="w-full bg-rose-900/30 hover:bg-rose-900/50 border border-rose-800/50 text-rose-400 hover:text-rose-300 font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all"
+                        >
+                            <Trash2 className="w-4 h-4" />
+                            Delete My Account
+                        </button>
+                    </div>
+                </section>
+
                 <div className="pt-6">
                     <button
                         onClick={handleSignOut}
@@ -297,6 +365,71 @@ export default function SettingsPage() {
                     <p className="text-center text-[10px] text-slate-600 mt-4">Version 1.0.0 • The Great Lock-In</p>
                 </div>
             </div>
+
+            {/* Delete Confirmation Modal */}
+            {showDeleteModal && (
+                <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4 animate-in fade-in duration-200">
+                    <div className="bg-slate-900 border border-rose-900/50 rounded-3xl p-6 max-w-md w-full space-y-5 animate-in slide-in-from-bottom-4 duration-300">
+                        <div className="text-center space-y-3">
+                            <div className="w-16 h-16 bg-rose-500/10 rounded-full flex items-center justify-center mx-auto">
+                                <AlertTriangle className="w-8 h-8 text-rose-500" />
+                            </div>
+                            <h3 className="text-xl font-bold text-white">Delete Account?</h3>
+                            <p className="text-sm text-slate-400 leading-relaxed">
+                                This will permanently delete your account, all survey submissions, team memberships, and uploaded files. This action cannot be undone.
+                            </p>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-xs font-bold text-slate-400 ml-1">
+                                Type <span className="text-rose-400">DELETE</span> to confirm
+                            </label>
+                            <input
+                                type="text"
+                                value={deleteConfirmText}
+                                onChange={(e) => setDeleteConfirmText(e.target.value)}
+                                placeholder="DELETE"
+                                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm outline-none focus:border-rose-500 transition-colors"
+                                autoFocus
+                            />
+                        </div>
+
+                        {message?.type === 'error' && (
+                            <p className="text-rose-400 text-sm text-center font-medium bg-rose-500/10 py-2 rounded-lg">
+                                {message.text}
+                            </p>
+                        )}
+
+                        <div className="grid grid-cols-2 gap-3">
+                            <button
+                                onClick={() => {
+                                    setShowDeleteModal(false)
+                                    setDeleteConfirmText('')
+                                    setMessage(null)
+                                }}
+                                disabled={isDeleting}
+                                className="bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-3 rounded-xl transition-all disabled:opacity-50"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleDeleteAccount}
+                                disabled={isDeleting || deleteConfirmText !== 'DELETE'}
+                                className="bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 rounded-xl transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                            >
+                                {isDeleting ? (
+                                    <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                ) : (
+                                    <>
+                                        <Trash2 className="w-4 h-4" />
+                                        Delete
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
