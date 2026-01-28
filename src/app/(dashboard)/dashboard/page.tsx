@@ -88,7 +88,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Leaderboard Preview */}
-            <div className="space-y-4">
+            <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between">
                     <h2 className="text-lg font-bold">Leaderboard Top 4</h2>
                     <Link href="/leaderboard" className="text-sm font-medium text-indigo-400 flex items-center gap-1">
