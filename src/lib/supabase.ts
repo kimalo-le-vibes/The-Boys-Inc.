@@ -7,8 +7,8 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export const getURL = () => {
     let url =
-        process?.env?.NEXT_PUBLIC_SITE_URL ?? // Custom site URL
-        process?.env?.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set on Vercel
+        (typeof window !== 'undefined' && window.location.origin ? window.location.origin : '') ??
+        process?.env?.NEXT_PUBLIC_VERCEL_URL ??
         'http://localhost:3000/'
 
     // Make sure to include `https://` when not localhost
