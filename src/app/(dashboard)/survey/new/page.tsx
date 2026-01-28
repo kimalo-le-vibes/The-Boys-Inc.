@@ -31,7 +31,7 @@ export default function NewSurveyPage() {
     const [error, setError] = useState<string | null>(null)
 
     // Calculate real-time score
-    const allQuestions = useMemo(() => surveyData.flatMap(cat => cat.questions) as Question[], [])
+    const allQuestions = useMemo(() => (surveyData as any).flatMap((cat: any) => cat.questions) as Question[], [])
     const currentScore = useMemo(() => calculateTotalScore(responses, allQuestions), [responses, allQuestions])
 
     useEffect(() => {
@@ -371,7 +371,7 @@ export default function NewSurveyPage() {
                         </header>
 
                         <div className="space-y-12">
-                            {currentCategory.questions?.map((q) => {
+                            {(currentCategory as any).questions?.map((q: any) => {
                                 const currentVal = responses[q.id]
                                 const currentPoints = currentVal !== undefined ? calculateQuestionScore(q as Question, currentVal) : 0
 
@@ -414,7 +414,7 @@ export default function NewSurveyPage() {
                                         {(q.type === 'binary' || q.type === 'multi') && (
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                                 {/* Logic to determine options: use 'options' array if present, else infer or use keys from mapping */}
-                                                {(q.options || (q.mapping ? Object.keys(q.mapping) : ['Yes', 'No'])).map((opt) => (
+                                                {(q.options || (q.mapping ? Object.keys(q.mapping) : ['Yes', 'No'])).map((opt: any) => (
                                                     <button
                                                         key={opt}
                                                         onClick={() => handleResponse(q.id, opt)}

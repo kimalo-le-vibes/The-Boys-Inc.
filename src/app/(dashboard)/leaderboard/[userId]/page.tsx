@@ -54,19 +54,19 @@ export default function UserHistoryPage() {
                             .eq('submission_id', sub.id)
 
                         // Calculate breakdown based on json mapping
-                        const breakdownMap: Record<string, { current: number, max: number }> = {}
+                        const breakdownMap: Record<string, { current: number, max: number }> = {};
 
                         // Initialize categories from JSON
-                        surveyQuestions.forEach(cat => {
+                        (surveyQuestions as any).forEach((cat: any) => {
                             breakdownMap[cat.category] = { current: 0, max: 0 }
 
                             // Calculate max possible for this category
-                            cat.questions.forEach(q => {
+                            cat.questions.forEach((q: any) => {
                                 // Max points per question is typically the point value (or max option mapping)
                                 // Simplified max calculation:
                                 let maxQ = 0
                                 if (q.mapping) {
-                                    maxQ = Math.max(...Object.values(q.mapping))
+                                    maxQ = Math.max(...(Object.values(q.mapping) as number[]))
                                 } else if (q.type === 'likert') {
                                     maxQ = 8 // New max score for Likert is 8
                                 } else {
