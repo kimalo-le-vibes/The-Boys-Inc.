@@ -11,11 +11,15 @@ import {
     Mail,
     ChevronRight,
     LogOut,
-    User
+    User,
+    Upload,
+    Camera
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
+import { UserAvatar } from '@/components/UserAvatar'
+import { useRef } from 'react'
 
 export default function SettingsPage() {
     const router = useRouter()
@@ -29,7 +33,9 @@ export default function SettingsPage() {
 
     // UI State
     const [isSaving, setIsSaving] = useState(false)
+    const [isUploading, setIsUploading] = useState(false)
     const [message, setMessage] = useState<{ text: string, type: 'success' | 'error' } | null>(null)
+    const fileInputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -57,6 +63,49 @@ export default function SettingsPage() {
 
         fetchProfile()
     }, [])
+
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+
+        setIsUploading(true)
+        setMessage(null)
+
+        try {
+            const fileExt = file.name.split('.').pop()
+            const fileName = `${userId}-${Math.random().toString(36).substring(2)}.${fileExt}`
+            const filePath = `avatars/${fileName}`
+
+            // 1. Upload to Storage
+            const { error: uploadError, data } = await supabase.storage
+                .from('avatars')
+                .upload(filePath, file, { cacheControl: '3600', upsert: true })
+
+            if (uploadError) throw uploadError
+
+            // 2. Get Public URL
+            const { data: { publicUrl } } = supabase.storage
+                .from('avatars')
+                .getPublicUrl(filePath)
+
+            setAvatarUrl(publicUrl)
+
+            // 3. Update Profile Immediately
+            const { error: updateError } = await supabase
+                .from('profiles')
+                .update({ avatar_url: publicUrl, updated_at: new Date().toISOString() })
+                .eq('id', userId)
+
+            if (updateError) throw updateError
+
+            setMessage({ text: 'Avatar uploaded and saved!', type: 'success' })
+        } catch (err: any) {
+            console.error('Upload error:', err)
+            setMessage({ text: err.message || 'Error uploading image. Is the "avatars" bucket created in Supabase?', type: 'error' })
+        } finally {
+            setIsUploading(false)
+        }
+    }
 
     const handleSaveProfile = async () => {
         setIsSaving(true)
@@ -107,25 +156,60 @@ export default function SettingsPage() {
                 <section className="space-y-3">
                     <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Profile Details</h3>
                     <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-5 space-y-4">
-                        <div className="flex items-center gap-4 mb-2">
-                            <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center text-2xl font-bold text-slate-400 border border-slate-700 overflow-hidden">
-                                {avatarUrl && avatarUrl.length > 2 ? (
-                                    <img src={avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
-                                ) : (
-                                    username ? username[0].toUpperCase() : 'U'
-                                )}
+                        <div className="flex flex-col sm:flex-row items-center gap-6 mb-4">
+                            <div className="relative group">
+                                <UserAvatar
+                                    url={avatarUrl}
+                                    name={fullName}
+                                    username={username}
+                                    size="xl"
+                                    className="border-2 border-slate-800 shadow-2xl transition-opacity group-hover:opacity-80"
+                                />
+                                <button
+                                    onClick={() => fileInputRef.current?.click()}
+                                    disabled={isUploading}
+                                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 rounded-3xl transition-opacity"
+                                >
+                                    {isUploading ? (
+                                        <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                    ) : (
+                                        <Camera className="w-8 h-8 text-white" />
+                                    )}
+                                </button>
+                                <input
+                                    type="file"
+                                    ref={fileInputRef}
+                                    onChange={handleFileUpload}
+                                    accept="image/*"
+                                    className="hidden"
+                                />
                             </div>
-                            <div className="flex-1">
-                                <label className="text-xs font-bold text-slate-500 uppercase">Avatar URL</label>
-                                <div className="flex items-center gap-3 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 mt-1 focus-within:border-indigo-500 transition-colors">
-                                    <input
-                                        value={avatarUrl}
-                                        onChange={(e) => setAvatarUrl(e.target.value)}
-                                        className="bg-transparent outline-none text-[10px] w-full placeholder:text-slate-600 truncate"
-                                        placeholder="https://example.com/avatar.jpg"
-                                    />
+
+                            <div className="flex-1 w-full space-y-3">
+                                <div>
+                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Avatar Mode</label>
+                                    <div className="flex gap-2 mt-2">
+                                        <button
+                                            onClick={() => fileInputRef.current?.click()}
+                                            className="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] font-bold py-2 px-3 rounded-lg border border-slate-700 transition-colors flex items-center justify-center gap-2"
+                                        >
+                                            <Upload className="w-3 h-3" />
+                                            Upload File
+                                        </button>
+                                    </div>
                                 </div>
-                                <p className="text-[10px] text-slate-500 mt-1">Paste a link to your profile picture</p>
+
+                                <div>
+                                    <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">External Link</label>
+                                    <div className="flex items-center gap-3 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 mt-2 focus-within:border-indigo-500 transition-colors">
+                                        <input
+                                            value={avatarUrl}
+                                            onChange={(e) => setAvatarUrl(e.target.value)}
+                                            className="bg-transparent outline-none text-[10px] w-full placeholder:text-slate-600 truncate text-slate-300"
+                                            placeholder="https://example.com/avatar.jpg"
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

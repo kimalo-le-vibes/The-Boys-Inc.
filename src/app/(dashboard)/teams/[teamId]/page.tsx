@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { ChevronLeft, Users, UserPlus, Trash2, Shield, Search } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { cn } from '@/lib/utils'
+import { UserAvatar } from '@/components/UserAvatar'
 
 export default function ManageTeamPage() {
     const params = useParams()
@@ -156,13 +157,13 @@ export default function ManageTeamPage() {
                         {searchResults.map(user => (
                             <div key={user.id} className="flex items-center justify-between p-3 bg-slate-950 rounded-xl border border-slate-800">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-xs font-bold overflow-hidden">
-                                        {user.avatar_url && user.avatar_url.length > 2 ? (
-                                            <img src={user.avatar_url} alt={user.username} className="w-full h-full object-cover" />
-                                        ) : (
-                                            user.username[0].toUpperCase()
-                                        )}
-                                    </div>
+                                    <UserAvatar
+                                        url={user.avatar_url}
+                                        name={user.full_name}
+                                        username={user.username}
+                                        size="sm"
+                                        className="rounded-lg"
+                                    />
                                     <div className="text-left">
                                         <p className="font-bold text-sm text-slate-200">{user.username}</p>
                                     </div>
@@ -190,13 +191,13 @@ export default function ManageTeamPage() {
                     {members.map((member) => (
                         <div key={member.id} className="flex items-center justify-between p-4 bg-slate-900 border border-slate-800 rounded-2xl">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-sm font-bold border border-slate-700 overflow-hidden">
-                                    {member.avatar_url && member.avatar_url.length > 2 ? (
-                                        <img src={member.avatar_url} alt={member.username} className="w-full h-full object-cover" />
-                                    ) : (
-                                        member.username[0].toUpperCase()
-                                    )}
-                                </div>
+                                <UserAvatar
+                                    url={member.avatar_url}
+                                    name={member.full_name}
+                                    username={member.username}
+                                    size="md"
+                                    className="rounded-xl border border-slate-700"
+                                />
                                 <div>
                                     <p className="font-bold text-sm text-white">{member.full_name || member.username}</p>
                                     <p className="text-[10px] text-slate-500 font-medium">

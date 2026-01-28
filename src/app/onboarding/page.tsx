@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
-import { User, AtSign, Check } from 'lucide-react'
+import { User, AtSign, Check, Camera } from 'lucide-react'
+import { UserAvatar } from '@/components/UserAvatar'
 
 export default function OnboardingPage() {
     const router = useRouter()
@@ -11,6 +12,7 @@ export default function OnboardingPage() {
     const [username, setUsername] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [avatarUrl, setAvatarUrl] = useState('')
 
     useEffect(() => {
         const checkUser = async () => {
@@ -20,6 +22,7 @@ export default function OnboardingPage() {
                 return
             }
             setFullName(session.user.user_metadata.full_name || '')
+            setAvatarUrl(session.user.user_metadata.avatar_url || '')
         }
         checkUser()
     }, [router])
@@ -38,7 +41,7 @@ export default function OnboardingPage() {
                 id: session.user.id,
                 username,
                 full_name: fullName,
-                avatar_url: session.user.user_metadata.avatar_url,
+                avatar_url: avatarUrl,
                 updated_at: new Date().toISOString(),
             })
 
@@ -56,9 +59,25 @@ export default function OnboardingPage() {
 
     return (
         <div className="max-w-md mx-auto py-20 px-4 space-y-10 animate-in fade-in duration-700">
-            <div className="text-center space-y-2">
-                <h1 className="text-3xl font-bold tracking-tight">Set up your profile</h1>
-                <p className="text-slate-400">Complete these details to join the competition.</p>
+            <div className="text-center space-y-4">
+                <div className="flex justify-center">
+                    <div className="relative group">
+                        <UserAvatar
+                            url={avatarUrl}
+                            name={fullName}
+                            username={username}
+                            size="xl"
+                            className="rounded-3xl shadow-2xl border-4 border-slate-800"
+                        />
+                        <div className="absolute -bottom-2 -right-2 bg-indigo-600 p-2 rounded-xl shadow-lg border-2 border-slate-950">
+                            <Camera className="w-4 h-4 text-white" />
+                        </div>
+                    </div>
+                </div>
+                <div className="space-y-1">
+                    <h1 className="text-3xl font-bold tracking-tight">Set up your profile</h1>
+                    <p className="text-slate-400">Complete these details to join the competition.</p>
+                </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Sparkles, Plus, ChevronRight, Trophy } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { supabase } from '@/lib/supabase'
+import { UserAvatar } from '@/components/UserAvatar'
 
 export default function DashboardPage() {
     const [user, setUser] = useState<any>(null)
@@ -96,33 +97,38 @@ export default function DashboardPage() {
                     </Link>
                 </div>
 
-                <div className="space-y-4">
+                <div className="flex flex-col gap-4">
                     {loading ? (
-                        [1, 2].map(i => <div key={i} className="h-16 w-full bg-slate-900/50 rounded-2xl animate-pulse" />)
+                        [1, 2].map(i => <div key={i} className="h-20 w-full bg-slate-900/50 rounded-2xl animate-pulse border border-slate-800/50" />)
                     ) : (
                         topUsers.map((user) => (
-                            <Link key={user.id} href={`/leaderboard/${user.id}`}>
+                            <Link key={user.id} href={`/leaderboard/${user.id}`} className="block transform transition-transform active:scale-[0.98]">
                                 <div
                                     className={cn(
-                                        "flex items-center gap-4 p-4 rounded-2xl transition-all",
+                                        "flex items-center gap-4 p-4 rounded-2xl transition-all border",
                                         user.isMe
-                                            ? "bg-indigo-600/10 border border-indigo-500/30"
-                                            : "bg-slate-900 border border-slate-800 hover:border-slate-700"
+                                            ? "bg-indigo-600/10 border-indigo-500/30"
+                                            : "bg-slate-900/40 border-slate-800 hover:border-slate-700 hover:bg-slate-900/60"
                                     )}
                                 >
-                                    <div className={cn(
-                                        "w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0",
-                                        user.rank === 1 ? "bg-yellow-500/20 text-yellow-500" : "bg-slate-800 text-slate-400"
-                                    )}>
-                                        {user.avatar.length > 2 ? <img src={user.avatar} className="w-full h-full object-cover rounded-xl" /> : user.avatar}
-                                    </div>
-                                    <div className="flex-1">
-                                        <p className={cn("font-bold text-sm", user.isMe ? "text-indigo-400" : "text-white")}>
+                                    <UserAvatar
+                                        url={user.avatar}
+                                        name={user.name}
+                                        size="md"
+                                        className={cn(
+                                            user.rank === 1 ? "border-yellow-500/50 bg-yellow-500/10" : "border-slate-700"
+                                        )}
+                                    />
+                                    <div className="flex-1 min-w-0">
+                                        <p className={cn("font-bold text-sm truncate", user.isMe ? "text-indigo-400" : "text-white")}>
                                             {user.name}
                                         </p>
-                                        <p className="text-xs text-slate-500">Rank #{user.rank}</p>
+                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Rank #{user.rank}</p>
                                     </div>
-                                    <span className="text-sm font-bold">{user.points.toLocaleString()}</span>
+                                    <div className="text-right">
+                                        <p className="text-lg font-black text-white">{user.points.toLocaleString()}</p>
+                                        <p className="text-[10px] text-slate-500 font-bold">PTS</p>
+                                    </div>
                                 </div>
                             </Link>
                         ))

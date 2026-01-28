@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from 'react'
 import { CategoryChart } from '@/components/CategoryChart'
 import {
     AreaChart,
@@ -17,43 +18,87 @@ import {
     Settings as SettingsIcon,
     MapPin,
     Calendar,
-    Link as LinkIcon
+    Trophy
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-
-const performanceData = [
-    { week: 'W1', points: 850 },
-    { week: 'W2', points: 920 },
-    { week: 'W3', points: 1100 },
-    { week: 'W4', points: 1050 },
-    { week: 'W5', points: 1240 },
-]
-
+import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
+import { UserAvatar } from '@/components/UserAvatar'
 
 export default function ProfilePage() {
+    const [user, setUser] = useState<any>(null)
+    const [performanceData, setPerformanceData] = useState<any[]>([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchProfileData = async () => {
+            const { data: { session } } = await supabase.auth.getSession()
+            if (!session) return
+
+            // 1. Fetch Profile
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('id', session.user.id)
+                .single()
+
+            if (profile) {
+                setUser(profile)
+            }
+
+            // 2. Fetch Recent Submissions for Chart
+            const { data: submissions } = await supabase
+                .from('survey_submissions')
+                .select('submitted_at, total_score')
+                .eq('profile_id', session.user.id)
+                .order('submitted_at', { ascending: true })
+                .limit(5)
+
+            if (submissions) {
+                const chartData = submissions.map((s, i) => ({
+                    week: `W${i + 1}`,
+                    points: s.total_score
+                }))
+                setPerformanceData(chartData)
+            }
+            setLoading(false)
+        }
+
+        fetchProfileData()
+    }, [])
+
+    if (loading) {
+        return <div className="p-12 text-center text-slate-500">Loading profile...</div>
+    }
+
     return (
         <div className="pb-24 px-4 pt-6 space-y-8 animate-in fade-in duration-700 max-w-lg mx-auto">
             {/* Profile Header */}
             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-5">
-                    <div className="w-20 h-20 rounded-2xl bg-indigo-600 flex items-center justify-center text-3xl font-bold text-white shadow-lg relative shrink-0">
-                        Y
-                        <div className="absolute -bottom-1.5 -right-1.5 w-6 h-6 bg-emerald-500 border-4 border-slate-950 rounded-full flex items-center justify-center">
+                <div className="flex items-center gap-5 min-w-0">
+                    <div className="relative shrink-0">
+                        <UserAvatar
+                            url={user?.avatar_url}
+                            name={user?.full_name}
+                            username={user?.username}
+                            size="lg"
+                            className="rounded-2xl shadow-lg border-2 border-slate-800"
+                        />
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 border-4 border-slate-950 rounded-full flex items-center justify-center">
                             <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
                         </div>
                     </div>
                     <div className="space-y-1 min-w-0">
-                        <h1 className="text-2xl font-bold tracking-tight truncate">Traveler</h1>
-                        <p className="text-slate-400 font-medium text-sm truncate">@traveler_lockin</p>
+                        <h1 className="text-2xl font-bold tracking-tight truncate">{user?.full_name || user?.username || 'Traveler'}</h1>
+                        <p className="text-slate-400 font-medium text-sm truncate">@{user?.username || 'user'}</p>
                         <div className="flex items-center gap-3 pt-1 text-xs text-slate-500">
                             <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> Global</span>
-                            <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> Jan 2026</span>
+                            <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> Joined {user?.created_at ? new Date(user.created_at).getFullYear() : '2026'}</span>
                         </div>
                     </div>
                 </div>
 
-                <Link href="/settings" className="p-3 bg-slate-900 border border-slate-800 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+                <Link href="/settings" className="p-3 bg-slate-900 border border-slate-800 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors shrink-0">
                     <SettingsIcon className="w-5 h-5" />
                 </Link>
             </div>
@@ -61,8 +106,8 @@ export default function ProfilePage() {
             {/* Achievements Scroll */}
             <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
                 {[
-                    { label: 'Streak', value: '12 Days', icon: Clock, bg: 'bg-indigo-500/10 text-indigo-400' },
-                    { label: 'Wins', value: '4 Top-3', icon: TrendingUp, bg: 'bg-emerald-500/10 text-emerald-400' },
+                    { label: 'Total Points', value: (user?.total_points || 0).toLocaleString(), icon: Trophy, bg: 'bg-indigo-500/10 text-indigo-400' },
+                    { label: 'Streak', value: '0 Days', icon: Clock, bg: 'bg-emerald-500/10 text-emerald-400' },
                     { label: 'Status', value: 'Verified', icon: Award, bg: 'bg-yellow-500/10 text-yellow-500' },
                 ].map((item, i) => (
                     <div key={i} className="bg-slate-900 border border-slate-800 p-3 rounded-xl min-w-[100px] flex-1">
@@ -95,47 +140,54 @@ export default function ProfilePage() {
                     </div>
 
                     <div className="h-[200px] w-full">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={performanceData}>
-                                <defs>
-                                    <linearGradient id="colorPoints" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
-                                        <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
-                                    </linearGradient>
-                                </defs>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                                <XAxis
-                                    dataKey="week"
-                                    stroke="#475569"
-                                    fontSize={10}
-                                    tickLine={false}
-                                    axisLine={false}
-                                />
-                                <YAxis
-                                    stroke="#475569"
-                                    fontSize={10}
-                                    tickLine={false}
-                                    axisLine={false}
-                                    tickFormatter={(value) => `${value}`}
-                                    width={30}
-                                />
-                                <Tooltip
-                                    contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px', fontSize: '12px' }}
-                                    itemStyle={{ color: '#818cf8', fontWeight: 'bold' }}
-                                />
-                                <Area
-                                    type="monotone"
-                                    dataKey="points"
-                                    stroke="#6366f1"
-                                    strokeWidth={3}
-                                    fillOpacity={1}
-                                    fill="url(#colorPoints)"
-                                />
-                            </AreaChart>
-                        </ResponsiveContainer>
+                        {performanceData.length > 0 ? (
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={performanceData}>
+                                    <defs>
+                                        <linearGradient id="colorPoints" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+                                    <XAxis
+                                        dataKey="week"
+                                        stroke="#475569"
+                                        fontSize={10}
+                                        tickLine={false}
+                                        axisLine={false}
+                                    />
+                                    <YAxis
+                                        stroke="#475569"
+                                        fontSize={10}
+                                        tickLine={false}
+                                        axisLine={false}
+                                        tickFormatter={(value) => `${value}`}
+                                        width={30}
+                                    />
+                                    <Tooltip
+                                        contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px', fontSize: '12px' }}
+                                        itemStyle={{ color: '#818cf8', fontWeight: 'bold' }}
+                                    />
+                                    <Area
+                                        type="monotone"
+                                        dataKey="points"
+                                        stroke="#6366f1"
+                                        strokeWidth={3}
+                                        fillOpacity={1}
+                                        fill="url(#colorPoints)"
+                                    />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        ) : (
+                            <div className="h-full flex items-center justify-center text-slate-500 text-xs">
+                                No performance history yet.
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
         </div>
     )
 }
+

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Trophy, Medal, Users, TrendingUp, Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { supabase } from '@/lib/supabase'
+import { UserAvatar } from '@/components/UserAvatar'
 
 // Fallback empty while loading or if no data
 const mockTeams = [
@@ -126,11 +127,11 @@ export default function LeaderboardPage() {
                 />
             </div>
 
-            <div className="space-y-4 min-h-[300px]">
+            <div className="flex flex-col gap-4 min-h-[300px]">
                 {loading && view === 'individuals' ? (
-                    <div className="space-y-3">
+                    <div className="flex flex-col gap-4">
                         {[1, 2, 3].map(i => (
-                            <div key={i} className="h-16 w-full bg-slate-900/50 rounded-2xl animate-pulse" />
+                            <div key={i} className="h-20 w-full bg-slate-900/50 rounded-2xl animate-pulse border border-slate-800/50" />
                         ))}
                     </div>
                 ) : (
@@ -141,7 +142,7 @@ export default function LeaderboardPage() {
                                 "flex items-center gap-4 p-4 rounded-2xl transition-all border w-full",
                                 (item as any).isMe
                                     ? "bg-indigo-600/10 border-indigo-500/30"
-                                    : "bg-slate-900/50 border-slate-800 hover:border-slate-700"
+                                    : "bg-slate-900/50 border-slate-800 hover:border-slate-700 hover:bg-slate-900/80"
                             )}>
                                 <div className="flex flex-col items-center justify-center min-w-[24px]">
                                     {item.rank === 1 && <Medal className="w-4 h-4 text-yellow-500 mb-0.5" />}
@@ -153,21 +154,27 @@ export default function LeaderboardPage() {
                                     )}>{item.rank}</span>
                                 </div>
 
-                                <div className="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-sm shrink-0 overflow-hidden">
-                                    {item.avatar.length > 2 ? <img src={item.avatar} alt={item.name} className="w-full h-full object-cover" /> : item.avatar}
-                                </div>
+                                <UserAvatar
+                                    url={item.avatar}
+                                    name={item.name}
+                                    username={item.username}
+                                    size="md"
+                                    className={cn(
+                                        item.rank === 1 ? "border-yellow-500/50 bg-yellow-500/10" : "border-slate-700"
+                                    )}
+                                />
 
                                 <div className="flex-1 min-w-0 text-left">
                                     <p className={cn("font-bold text-sm truncate", (item as any).isMe ? "text-indigo-400" : "text-slate-200")}>
                                         {item.name}
                                     </p>
-                                    <p className="text-xs text-slate-500 truncate">
+                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest truncate">
                                         {view === 'individuals' ? `@${(item as any).username}` : `${(item as any).members} Members`}
                                     </p>
                                 </div>
 
                                 <div className="text-right">
-                                    <p className="font-bold text-sm text-white">{item.points.toLocaleString()}</p>
+                                    <p className="text-lg font-black text-white">{item.points.toLocaleString()}</p>
                                     {view === 'individuals' && (item as any).change !== '0' && (
                                         <p className={cn(
                                             "text-[10px] font-bold",
@@ -183,7 +190,7 @@ export default function LeaderboardPage() {
                         // Conditional linking
                         if (view === 'individuals') {
                             return (
-                                <Link key={item.id} href={`/leaderboard/${item.id}`} className="block w-full">
+                                <Link key={item.id} href={`/leaderboard/${item.id}`} className="block w-full transform transition-transform active:scale-[0.98]">
                                     {content}
                                 </Link>
                             )

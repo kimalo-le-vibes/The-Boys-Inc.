@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { ChevronLeft, ChevronDown, ChevronUp, MapPin, Calendar, Trophy } from 'lucide-react'
+import { ChevronLeft, ChevronDown, ChevronUp, Calendar, Trophy, Target, Award, TrendingUp, BarChart3, MapPin } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { supabase } from '@/lib/supabase'
+import { UserAvatar } from '@/components/UserAvatar'
 import surveyQuestions from '@/data/survey_questions.json'
 import { format } from 'date-fns'
 
@@ -152,13 +153,15 @@ export default function UserHistoryPage() {
 
             {/* User Card */}
             <div className="bg-slate-900/50 border border-slate-800 rounded-3xl p-6 flex flex-col items-center text-center space-y-4">
-                <div className="w-24 h-24 rounded-3xl bg-indigo-600 flex items-center justify-center text-4xl font-bold text-white shadow-2xl relative overflow-hidden border-2 border-slate-800">
-                    {user.avatar_url && user.avatar_url.startsWith('http') ? (
-                        <img src={user.avatar_url} alt={user.username} className="w-full h-full object-cover" />
-                    ) : (
-                        user.avatar_url || user.username?.[0]?.toUpperCase() || 'U'
-                    )}
-                    <div className="absolute -bottom-3 px-3 py-1 bg-amber-500 border-4 border-slate-950 rounded-full flex items-center justify-center text-xs font-black text-slate-950 shadow-lg z-10">
+                <div className="relative">
+                    <UserAvatar
+                        url={user.avatar_url}
+                        name={user.full_name}
+                        username={user.username}
+                        size="xl"
+                        className="rounded-3xl shadow-2xl relative border-2 border-slate-800"
+                    />
+                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-amber-500 border-4 border-slate-950 rounded-full flex items-center justify-center text-xs font-black text-slate-950 shadow-lg z-10">
                         #{user.rank || '-'}
                     </div>
                 </div>
