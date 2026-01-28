@@ -152,9 +152,13 @@ export default function UserHistoryPage() {
 
             {/* User Card */}
             <div className="bg-slate-900/50 border border-slate-800 rounded-3xl p-6 flex flex-col items-center text-center space-y-4">
-                <div className="w-24 h-24 rounded-3xl bg-indigo-600 flex items-center justify-center text-4xl font-bold text-white shadow-2xl relative">
-                    {user.avatar_url || user.username?.[0]?.toUpperCase() || 'U'}
-                    <div className="absolute -bottom-3 px-3 py-1 bg-amber-500 border-4 border-slate-950 rounded-full flex items-center justify-center text-xs font-black text-slate-950 shadow-lg">
+                <div className="w-24 h-24 rounded-3xl bg-indigo-600 flex items-center justify-center text-4xl font-bold text-white shadow-2xl relative overflow-hidden border-2 border-slate-800">
+                    {user.avatar_url && user.avatar_url.startsWith('http') ? (
+                        <img src={user.avatar_url} alt={user.username} className="w-full h-full object-cover" />
+                    ) : (
+                        user.avatar_url || user.username?.[0]?.toUpperCase() || 'U'
+                    )}
+                    <div className="absolute -bottom-3 px-3 py-1 bg-amber-500 border-4 border-slate-950 rounded-full flex items-center justify-center text-xs font-black text-slate-950 shadow-lg z-10">
                         #{user.rank || '-'}
                     </div>
                 </div>

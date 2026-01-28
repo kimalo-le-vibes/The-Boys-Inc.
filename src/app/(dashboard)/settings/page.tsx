@@ -70,6 +70,7 @@ export default function SettingsPage() {
                 .update({
                     full_name: fullName,
                     username: username,
+                    avatar_url: avatarUrl,
                     updated_at: new Date().toISOString()
                 })
                 .eq('id', userId)
@@ -114,9 +115,17 @@ export default function SettingsPage() {
                                     username ? username[0].toUpperCase() : 'U'
                                 )}
                             </div>
-                            <div>
-                                <button className="text-xs font-bold text-indigo-400 hover:text-white transition-colors">Change Avatar</button>
-                                <p className="text-[10px] text-slate-500 mt-1">Tap to upload new image</p>
+                            <div className="flex-1">
+                                <label className="text-xs font-bold text-slate-500 uppercase">Avatar URL</label>
+                                <div className="flex items-center gap-3 bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 mt-1 focus-within:border-indigo-500 transition-colors">
+                                    <input
+                                        value={avatarUrl}
+                                        onChange={(e) => setAvatarUrl(e.target.value)}
+                                        className="bg-transparent outline-none text-[10px] w-full placeholder:text-slate-600 truncate"
+                                        placeholder="https://example.com/avatar.jpg"
+                                    />
+                                </div>
+                                <p className="text-[10px] text-slate-500 mt-1">Paste a link to your profile picture</p>
                             </div>
                         </div>
 

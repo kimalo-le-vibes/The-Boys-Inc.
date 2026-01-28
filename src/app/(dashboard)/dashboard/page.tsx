@@ -96,7 +96,7 @@ export default function DashboardPage() {
                     </Link>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-4">
                     {loading ? (
                         [1, 2].map(i => <div key={i} className="h-16 w-full bg-slate-900/50 rounded-2xl animate-pulse" />)
                     ) : (
@@ -104,7 +104,7 @@ export default function DashboardPage() {
                             <Link key={user.id} href={`/leaderboard/${user.id}`}>
                                 <div
                                     className={cn(
-                                        "flex items-center gap-3 p-3 rounded-2xl transition-all",
+                                        "flex items-center gap-4 p-4 rounded-2xl transition-all",
                                         user.isMe
                                             ? "bg-indigo-600/10 border border-indigo-500/30"
                                             : "bg-slate-900 border border-slate-800 hover:border-slate-700"

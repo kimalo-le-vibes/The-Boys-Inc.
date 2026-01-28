@@ -3,50 +3,50 @@
         "category": "Spiritual Audit",
         "questions": [
             {
-                "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+                "id": "478b1251-20bd-41f4-9607-ae1ac303a771",
                 "text": "How frequently have I met with God this week?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+                "id": "914bb84b-ca16-4ce0-9e17-208ce35271d8",
                 "text": "Have I been expressing Gratitude to God this Week?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
+                "id": "dac89f62-756f-44e7-b983-0d1a1c03de80",
                 "text": "How well have I prioritised diligent bible reading/study over other important things in life?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
+                "id": "63bdba8e-28fe-48ef-b694-32b9e8ffeaeb",
                 "text": "How well have I prioritized diligent prayer over other important things in life?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
-                "text": "How often am I actually meeting God from the Heart and not just for formality’s sake?",
+                "id": "2f922d96-4018-4952-b630-973168559ef3",
+                "text": "How often am I actually meeting God from the Heart and not just for formality\u2019s sake?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
+                "id": "874ca8c1-6761-4492-9198-26d4eecd283f",
                 "text": "How often am I being distracted by social media and distractions instead of meeting with God?",
                 "type": "likert",
                 "points": 8,
                 "invert": true
             },
             {
-                "id": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
+                "id": "72a90c38-f5d8-49f3-ab14-4455fec4565c",
                 "text": "How diligent have i been with attending and concentrating during church activities?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
+                "id": "9ce6bea2-70a0-4059-a7a8-b5397316c176",
                 "text": "Am I more focused on how I look spirituality than how I am spiritually?",
                 "type": "binary",
                 "mapping": {
@@ -55,32 +55,32 @@
                 }
             },
             {
-                "id": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
+                "id": "e502900d-5b5e-4708-9ad8-90c364a3d663",
                 "text": "How intentional have you been with caring for your disciples?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
+                "id": "2a54232d-7d82-4fa4-8c33-955a2f1f9f96",
                 "text": "How intentional have you been with being discipled?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
+                "id": "85fca444-3d7a-4de0-ba8f-b2272fa061b7",
                 "text": "How intentional have you been about evangelism?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c",
+                "id": "557eee14-8328-4f82-806e-5c13d78392a9",
                 "text": "How humble have I been in how I view myself when serving God?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d",
-                "text": "Am I open to correction from People Younger, less experienced or less “spiritual” than me?",
+                "id": "cd56f79b-0fcc-44cc-a89b-f873039ce03a",
+                "text": "Am I open to correction from People Younger, less experienced or less \u201cspiritual\u201d than me?",
                 "type": "binary",
                 "mapping": {
                     "Yes": 8,
@@ -88,13 +88,13 @@
                 }
             },
             {
-                "id": "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
+                "id": "42bcc307-ac32-450f-8707-cff561c46d07",
                 "text": "Do I see the people I serve with as my competitors or team member?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
+                "id": "bd684098-f669-42f1-9849-778f2a88ee22",
                 "text": "Do I crave recognition, praise, or being seen as important when I serve God?",
                 "type": "binary",
                 "mapping": {
@@ -103,7 +103,7 @@
                 }
             },
             {
-                "id": "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a",
+                "id": "41951fcb-d202-446d-a12b-a0b299b4faea",
                 "text": "How well have I been relying on and acknowledging God in all my ways?",
                 "type": "likert",
                 "points": 8
@@ -114,7 +114,7 @@
         "category": "Moral Audit",
         "questions": [
             {
-                "id": "e7f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1b",
+                "id": "a8c81c17-57eb-486b-9de5-7ebb2d141ee4",
                 "text": "Have I eaten Ice cream this Week?",
                 "type": "binary",
                 "mapping": {
@@ -123,7 +123,7 @@
                 }
             },
             {
-                "id": "f8a9b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2c",
+                "id": "5f7ae971-7ab9-43f7-a90b-c1ad84c4e6d4",
                 "text": "Am I entertaining lustful thoughts about someone?",
                 "type": "binary",
                 "mapping": {
@@ -132,13 +132,13 @@
                 }
             },
             {
-                "id": "a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d",
+                "id": "21d53021-03e6-4228-83c2-c60625f2b4dd",
                 "text": "How actively am I keeping the guard rails in my fight for purity?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "b0c1d2e3-f4a5-4b6c-7d8e-9f0a1b2c3d4e",
+                "id": "1bc44d85-2099-4df9-a3bf-27c61602ead5",
                 "text": "Are all the following measures in place? (Second Looks, Idleness, watching triggering or provocative content, interactions with shawties?)",
                 "type": "multi",
                 "options": [
@@ -153,8 +153,8 @@
                 }
             },
             {
-                "id": "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
-                "text": "Have I thought of myself as better than others just because I haven’t sinned the way they have?",
+                "id": "e33ef64b-7a9e-482b-b945-bca09b1cef87",
+                "text": "Have I thought of myself as better than others just because I haven\u2019t sinned the way they have?",
                 "type": "binary",
                 "mapping": {
                     "Yes": 0,
@@ -162,7 +162,7 @@
                 }
             },
             {
-                "id": "d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a",
+                "id": "241347fe-3467-49a5-9502-5077ac330aac",
                 "text": "Are you withholding forgiveness from people that have wronged you?",
                 "type": "binary",
                 "mapping": {
@@ -171,7 +171,7 @@
                 }
             },
             {
-                "id": "e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b",
+                "id": "996992b5-c7bc-4f3f-99f2-8ce51b2f7c22",
                 "text": "Are you confessing and seeking out forgiveness from those you have wronged?",
                 "type": "binary",
                 "mapping": {
@@ -180,7 +180,7 @@
                 }
             },
             {
-                "id": "f4a5b6c7-d8e9-4f0a-1b2c-3d4e5f6a7b8c",
+                "id": "0d03996b-6089-458a-ab8d-0485124de23d",
                 "text": "Have I said something about a brother or sister that was not my place to say?",
                 "type": "binary",
                 "mapping": {
@@ -189,7 +189,7 @@
                 }
             },
             {
-                "id": "a5b6c7d8-e9f0-4a1b-2c3d-4e5f6a7b8c9d",
+                "id": "e31d20eb-6226-4482-b226-512deac3ca54",
                 "text": "Are you hiding any sins, or telling half-truths to them?",
                 "type": "binary",
                 "mapping": {
@@ -198,7 +198,7 @@
                 }
             },
             {
-                "id": "b6c7d8e9-f0a1-4b2c-3d4e-5f6a7b8c9d0e",
+                "id": "3c8591e7-8c6a-41d6-bde5-2e2eefe0c182",
                 "text": "Am I daily Repenting for my sins and reminding myself of the Gospel?",
                 "type": "binary",
                 "mapping": {
@@ -212,61 +212,61 @@
         "category": "Fitness Audit",
         "questions": [
             {
-                "id": "c7d8e9f0-a1b2-4c3d-4e5f-6a7b8c9d0e1f",
+                "id": "8ee12615-01b6-41ae-bcc9-5e367407a25a",
                 "text": "How well did I progressively challenge myself in my workouts?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "d8e9f0a1-b2c3-4d4e-5f6a-7b8c9d0e1f2a",
+                "id": "736be2d7-5c32-4e27-bc84-f59821abe0b9",
                 "text": "How consistently did I complete my planned workouts this week?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "e9f0a1b2-c3d4-4e5f-6a7b-8c9d0e1f2a3b",
+                "id": "52130bcb-c9f5-422b-bf0e-28b5d6e6fe0b",
                 "text": "How focused and intense were my workouts?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "f0a1b2c3-d4e5-4f6a-7b8c-9d0e1f2a3b4c",
+                "id": "93a12f70-0375-4a25-963a-c9246859d860",
                 "text": "How accurately did I log my workouts/exercises?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5e",
+                "id": "62d97346-9a2b-4838-8497-c79d57a6775b",
                 "text": "How well Am I eating in a way that supports my fitness goals?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6f",
+                "id": "f286334f-429e-4317-ab2b-172e70ed3190",
                 "text": "How well did I do with my hydration routine?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7a",
+                "id": "70aea900-3ecf-47cc-a265-fe5113817ef4",
                 "text": "How Good was my sleeping schedule?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8b",
+                "id": "2f855e33-6db5-4dc6-973a-07e4959647ac",
                 "text": "How well did I track and review my fitness progress this week?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9c",
+                "id": "6b875fe3-27e8-435b-a93e-c834e822a2a9",
                 "text": "How well did I eliminate or control the things that normally act as roadblocks to my fitness?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0d",
+                "id": "5ac16f85-0ee8-4235-bccf-f265b32d3d36",
                 "text": "Have I been seeking to Steward my body for the glory of God or the glory of self?",
                 "type": "binary",
                 "mapping": {
@@ -280,13 +280,13 @@
         "category": "Financial Stewardship Audit",
         "questions": [
             {
-                "id": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1e",
+                "id": "76f412f9-66a2-428e-8666-2044f9124a31",
                 "text": "How Frequently have I been reviewing my finances?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2f",
+                "id": "99ce28fb-5527-4778-b36d-4cbd237e9cee",
                 "text": "Did I set money aside to Help people or was I only selfish?",
                 "type": "binary",
                 "mapping": {
@@ -295,13 +295,13 @@
                 }
             },
             {
-                "id": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
+                "id": "c1623f25-0a11-4012-a938-09a868d38b61",
                 "text": "How well did I stick to my Budget?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4b",
+                "id": "0acc1117-2b5b-4505-aaca-bda5d8205ccf",
                 "text": "Did I save the amount I planned on saving?",
                 "type": "binary",
                 "mapping": {
@@ -310,13 +310,13 @@
                 }
             },
             {
-                "id": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5c",
+                "id": "568b6178-d09b-4118-8f49-d703ad3ec231",
                 "text": "How well have I been tracking expenses?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6d",
+                "id": "567cdb9d-fc99-4843-8ef3-3799c961a358",
                 "text": "Did I make any impulse or emotional purchases?",
                 "type": "binary",
                 "mapping": {
@@ -325,7 +325,7 @@
                 }
             },
             {
-                "id": "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7e",
+                "id": "a92d4a78-2978-4620-8b16-db89956c12f5",
                 "text": "Have I set Aside money for investment not just saving?",
                 "type": "binary",
                 "mapping": {
@@ -334,7 +334,7 @@
                 }
             },
             {
-                "id": "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8f",
+                "id": "425fd191-2d3d-43ee-97cb-05c94aa0787a",
                 "text": "Do my financial habits honor God and my long-term calling?",
                 "type": "binary",
                 "mapping": {
@@ -343,13 +343,13 @@
                 }
             },
             {
-                "id": "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
+                "id": "b9d024e1-7483-4137-8c62-b9bc87a11429",
                 "text": "Was my attitude when receiving money this week acknowledging that it was God's money entrusted to me or did I see it as my own entitlement?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0b",
+                "id": "01363e76-c69f-4be7-b46d-cb34ecb52b3f",
                 "text": "When I gave money this week, Was it done with willingness and joy or reluctantly and begrudgingly?",
                 "type": "binary",
                 "mapping": {
@@ -358,7 +358,7 @@
                 }
             },
             {
-                "id": "e7f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1c",
+                "id": "3fdb216a-730d-43db-836d-deda771e33f0",
                 "text": "Did any of my spending contradict my goals?",
                 "type": "binary",
                 "mapping": {
@@ -372,7 +372,7 @@
         "category": "Social Life Audit",
         "questions": [
             {
-                "id": "f8a9b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2d",
+                "id": "a5459974-c8cc-4da7-9f1c-ed66934f2bab",
                 "text": "Did I see relationships as opportunities to serve or transactions to manage?",
                 "type": "binary",
                 "mapping": {
@@ -381,7 +381,7 @@
                 }
             },
             {
-                "id": "a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3e",
+                "id": "7c557c05-2312-48ee-9d4f-3e096a4c33bd",
                 "text": "Was I present, patient, and attentive or distracted and self-focused?",
                 "type": "binary",
                 "mapping": {
@@ -390,19 +390,19 @@
                 }
             },
             {
-                "id": "b0c1d2e3-f4a5-4b6c-7d8e-9f0a1b2c3d4f",
+                "id": "c52e472e-23a9-494b-afe8-2f844e1bede0",
                 "text": "How well Did I intentionally invest in meaningful relationships?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
+                "id": "5c961954-0284-432e-8367-81ce361ecd88",
                 "text": "Are my closest relationships helping me grow spiritually and emotionally?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6b",
+                "id": "8590aaa6-1a78-4e07-ba0c-de7f5d895aa7",
                 "text": "Did I seek out to check in, encourage or support a friend this week?",
                 "type": "binary",
                 "mapping": {
@@ -411,13 +411,13 @@
                 }
             },
             {
-                "id": "e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7c",
+                "id": "9da597bc-f3c1-4c30-ae35-78c341aa28f9",
                 "text": "Did I show genuine care through words and actions?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "f4a5b6c7-d8e9-4f0a-1b2c-3d4e5f6a7b8d",
+                "id": "fa1c0dce-5161-43e2-b30a-7fbe7bf78107",
                 "text": "Am I building community or isolating myself?",
                 "type": "binary",
                 "mapping": {
@@ -426,7 +426,7 @@
                 }
             },
             {
-                "id": "a5b6c7d8-e9f0-4a1b-2c3d-4e5f6a7b8c9e",
+                "id": "e14f6295-96a9-4a92-8c7e-f1e1117db289",
                 "text": "Was I quick to listen and slow to speak?",
                 "type": "binary",
                 "mapping": {
@@ -435,7 +435,7 @@
                 }
             },
             {
-                "id": "b6c7d8e9-f0a1-4b2c-3d4e-5f6a7b8c9d0f",
+                "id": "e4a98dc5-d371-492f-8381-91259de7818a",
                 "text": "Did I serve others without expecting anything in return?",
                 "type": "binary",
                 "mapping": {
@@ -444,7 +444,7 @@
                 }
             },
             {
-                "id": "c7d8e9f0-a1b2-4c3d-4e5f-6a7b8c9d0e1f",
+                "id": "c7c6ed88-0419-46f5-8b34-ba6443d251be",
                 "text": "Are my relationships healthy and life-giving?",
                 "type": "binary",
                 "mapping": {
@@ -453,7 +453,7 @@
                 }
             },
             {
-                "id": "d8e9f0a1-b2c3-4d4e-5f6a-7b8c9d0e1f2b",
+                "id": "d666c43d-213e-458b-8d4e-f2cb8bc7dd93",
                 "text": "Did I maintain wise boundaries with my time, energy, and emotions?",
                 "type": "binary",
                 "mapping": {
@@ -462,7 +462,7 @@
                 }
             },
             {
-                "id": "e9f0a1b2-c3d4-4e5f-6a7b-8c9d0e1f2a3c",
+                "id": "a17ae0d3-819e-4ae2-9c88-b0fd88ec3b97",
                 "text": "Am I being influenced more than I influence?",
                 "type": "binary",
                 "mapping": {
@@ -471,7 +471,7 @@
                 }
             },
             {
-                "id": "f0a1b2c3-d4e5-4f6a-7b8c-9d0e1f2a3b4d",
+                "id": "ac96cb42-345e-4569-9dbf-1716f25aef56",
                 "text": "Do my friendships pull me closer to or further from my values?",
                 "type": "binary",
                 "mapping": {
@@ -480,7 +480,7 @@
                 }
             },
             {
-                "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5f",
+                "id": "8830cb8a-7538-4a55-9644-310e32698586",
                 "text": "Did I communicate honestly and respectfully?",
                 "type": "binary",
                 "mapping": {
@@ -489,7 +489,7 @@
                 }
             },
             {
-                "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6f",
+                "id": "493cf895-3335-4d80-aabe-2a770a613d23",
                 "text": "Did I avoid difficult but necessary conversations?",
                 "type": "binary",
                 "mapping": {
@@ -498,7 +498,7 @@
                 }
             },
             {
-                "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7b",
+                "id": "86a60e1f-201b-4374-98f4-bc6e829d6bf0",
                 "text": "Did I make time for people who matter most?",
                 "type": "binary",
                 "mapping": {
@@ -507,7 +507,7 @@
                 }
             },
             {
-                "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8c",
+                "id": "a953634c-87bb-4876-9488-9921b3ad9bf3",
                 "text": "Does my social life support my spiritual and personal growth?",
                 "type": "binary",
                 "mapping": {
@@ -516,7 +516,7 @@
                 }
             },
             {
-                "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9d",
+                "id": "77053d08-fa55-4234-bb1e-a72c98c2a053",
                 "text": "Am I loving others the way Christ loves me?",
                 "type": "binary",
                 "mapping": {
@@ -525,7 +525,7 @@
                 }
             },
             {
-                "id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0e",
+                "id": "de7627b5-a739-4a0c-bec4-d7bb215f349f",
                 "text": "Do my relationships reflect the kind of person I want to become?",
                 "type": "binary",
                 "mapping": {
@@ -534,7 +534,7 @@
                 }
             },
             {
-                "id": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1f",
+                "id": "d5846bb7-c7ab-4a3c-b1d6-523a24705a6e",
                 "text": "If my social patterns stay the same for 12 months, will my life be richer or emptier?",
                 "type": "binary",
                 "mapping": {
@@ -548,7 +548,7 @@
         "category": "Career Audit",
         "questions": [
             {
-                "id": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2f",
+                "id": "753eaef9-12e4-4e9e-ba9e-70d5ee706f1b",
                 "text": "Did I see my education/job as a burden, a stepping stone, or a stewardship?",
                 "type": "multi",
                 "options": [
@@ -563,7 +563,7 @@
                 }
             },
             {
-                "id": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
+                "id": "a6c2842a-4f8a-4cec-867f-fec9f731981c",
                 "text": "Did I approach my responsibilities with gratitude, diligence, and humility?",
                 "type": "binary",
                 "mapping": {
@@ -572,8 +572,8 @@
                 }
             },
             {
-                "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4c",
-                "text": "Am I acting like this season “doesn’t matter,” or treating it as preparation?",
+                "id": "9d5c4187-aa52-49b3-b293-64d0bd42a8f3",
+                "text": "Am I acting like this season \u201cdoesn\u2019t matter,\u201d or treating it as preparation?",
                 "type": "binary",
                 "mapping": {
                     "PREPARATION": 8,
@@ -581,7 +581,7 @@
                 }
             },
             {
-                "id": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5d",
+                "id": "299e16c0-2852-42b2-ae8d-95a29f86247d",
                 "text": "Do I see my current role (student or employee) as part of my long-term calling?",
                 "type": "binary",
                 "mapping": {
@@ -590,7 +590,7 @@
                 }
             },
             {
-                "id": "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6e",
+                "id": "47f7f675-b666-4438-948f-5b3a033e4c5a",
                 "text": "Did I pursue excellence even in tasks that felt boring or insignificant?",
                 "type": "binary",
                 "mapping": {
@@ -599,7 +599,7 @@
                 }
             },
             {
-                "id": "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7f",
+                "id": "4dc75244-3777-4b76-91ac-c954cacba2b5",
                 "text": "Did I show up on time and prepared (classes, lectures, meetings, shifts)?",
                 "type": "binary",
                 "mapping": {
@@ -608,7 +608,7 @@
                 }
             },
             {
-                "id": "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8f",
+                "id": "0dd5d299-0b98-4d00-8a88-99753b9dfa21",
                 "text": "Was I disciplined with my time, focus, and energy?",
                 "type": "binary",
                 "mapping": {
@@ -617,7 +617,7 @@
                 }
             },
             {
-                "id": "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
+                "id": "9389f1fd-5378-4d9f-a796-a20382f114c0",
                 "text": "Did I procrastinate on important work (assignments, studying, projects)?",
                 "type": "binary",
                 "mapping": {
@@ -626,7 +626,7 @@
                 }
             },
             {
-                "id": "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0c",
+                "id": "472d9509-1acf-46b7-a33b-e56e34d2e42c",
                 "text": "Did I intentionally build skills beyond requirements (courses, certifications, practice)?",
                 "type": "binary",
                 "mapping": {
@@ -635,7 +635,7 @@
                 }
             },
             {
-                "id": "e7f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1d",
+                "id": "91680c7f-1f34-4fa3-8be6-0ec48c87536c",
                 "text": "Did I seek feedback from professors, supervisors, or mentors?",
                 "type": "binary",
                 "mapping": {
@@ -644,7 +644,7 @@
                 }
             },
             {
-                "id": "f8a9b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2e",
+                "id": "8574fef4-c949-4918-9da6-16fcd9b420e3",
                 "text": "Did my actions this week move me closer to those goals?",
                 "type": "binary",
                 "mapping": {
@@ -653,7 +653,7 @@
                 }
             },
             {
-                "id": "a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3f",
+                "id": "ff91ab01-0ef4-4181-be90-f542530c2e5f",
                 "text": "Was I honest in my work, assignments, exams, and interactions?",
                 "type": "binary",
                 "mapping": {
@@ -662,13 +662,13 @@
                 }
             },
             {
-                "id": "b0c1d2e3-f4a5-4b6c-7d8e-9f0a1b2c3d4f",
+                "id": "8ed974e9-3b14-41db-ab2f-a5cdf7f31181",
                 "text": "Did I take responsibility for mistakes or make excuses?",
                 "type": "likert",
                 "points": 8
             },
             {
-                "id": "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
+                "id": "2be9f161-53ca-4c38-9efb-123d12b6381e",
                 "text": "Did I take initiative instead of waiting to be told what to do?",
                 "type": "binary",
                 "mapping": {
@@ -677,7 +677,7 @@
                 }
             },
             {
-                "id": "d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6c",
+                "id": "489d0ed3-a1dc-4d56-95af-c78348f8fd59",
                 "text": "Did fear or comfort stop me from growing?",
                 "type": "binary",
                 "mapping": {
@@ -686,7 +686,7 @@
                 }
             },
             {
-                "id": "e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7d",
+                "id": "2fe0f2d0-0d69-4f73-af4a-3200e9112a0b",
                 "text": "Did I balance work/study with rest and health?",
                 "type": "binary",
                 "mapping": {

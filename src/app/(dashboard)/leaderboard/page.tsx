@@ -14,6 +14,7 @@ const mockTeams = [
 ]
 
 export default function LeaderboardPage() {
+    const [teams, setTeams] = useState<any[]>([])
     const [view, setView] = useState<'individuals' | 'teams'>('individuals')
     const [search, setSearch] = useState('')
     const [individuals, setIndividuals] = useState<any[]>([])
@@ -21,13 +22,14 @@ export default function LeaderboardPage() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const fetchLeaderboard = async () => {
+        const fetchData = async () => {
+            setLoading(true)
             // Get current user for highlighting
             const { data: { session } } = await supabase.auth.getSession()
             setCurrentUserId(session?.user?.id || '')
 
-            // Fetch profiles sorted by points
-            const { data: profiles, error } = await supabase
+            // 1. Fetch Individuals
+            const { data: profiles } = await supabase
                 .from('profiles')
                 .select('*')
                 .order('total_points', { ascending: false })
@@ -41,20 +43,45 @@ export default function LeaderboardPage() {
                     points: p.total_points || 0,
                     rank: index + 1,
                     avatar: p.avatar_url || (p.username ? p.username[0].toUpperCase() : 'U'),
-                    change: '0', // Placeholder
+                    change: '0',
                     isMe: p.id === session?.user?.id
                 }))
                 setIndividuals(formatted)
             }
+
+            // 2. Fetch Teams and Aggregate Points
+            const { data: teamsData } = await supabase
+                .from('teams')
+                .select('*, team_members(profile_id, profiles(total_points))')
+
+            if (teamsData) {
+                const formattedTeams = teamsData.map((t) => {
+                    const members = t.team_members || []
+                    const teamPoints = members.reduce((acc: number, m: any) => acc + (m.profiles?.total_points || 0), 0)
+                    return {
+                        id: t.id,
+                        name: t.name,
+                        members: members.length,
+                        points: teamPoints,
+                        avatar: t.name.substring(0, 2).toUpperCase()
+                    }
+                })
+                // Sort by points
+                formattedTeams.sort((a, b) => b.points - a.points)
+                // Assign Ranks
+                const rankedTeams = formattedTeams.map((t, idx) => ({ ...t, rank: idx + 1 }))
+                setTeams(rankedTeams)
+            }
+
             setLoading(false)
         }
 
-        fetchLeaderboard()
+        fetchData()
     }, [])
 
     const filteredList = view === 'individuals'
         ? individuals.filter(i => i.name.toLowerCase().includes(search.toLowerCase()) || i.username.toLowerCase().includes(search.toLowerCase()))
-        : mockTeams // Teams mocked for now as per instructions/scope
+        : teams.filter(t => t.name.toLowerCase().includes(search.toLowerCase()))
 
     return (
         <div className="pb-24 px-4 pt-6 space-y-6 animate-in fade-in duration-700 max-w-lg mx-auto">
@@ -99,7 +126,7 @@ export default function LeaderboardPage() {
                 />
             </div>
 
-            <div className="space-y-3 min-h-[300px]">
+            <div className="space-y-4 min-h-[300px]">
                 {loading && view === 'individuals' ? (
                     <div className="space-y-3">
                         {[1, 2, 3].map(i => (
@@ -111,7 +138,7 @@ export default function LeaderboardPage() {
                         // Render content first
                         const content = (
                             <div className={cn(
-                                "flex items-center gap-3 p-3 rounded-2xl transition-all border w-full",
+                                "flex items-center gap-4 p-4 rounded-2xl transition-all border w-full",
                                 (item as any).isMe
                                     ? "bg-indigo-600/10 border-indigo-500/30"
                                     : "bg-slate-900/50 border-slate-800 hover:border-slate-700"
